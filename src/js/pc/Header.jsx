@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Btn from "../common/btn";
+import Btn from "../common/Btn";
 function Header() {
   return (
     <>
