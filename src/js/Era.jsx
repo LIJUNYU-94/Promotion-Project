@@ -2,87 +2,9 @@ import { useState, useEffect } from "react";
 import Midashi from "./common/Midashi";
 import eraphoto from "../img/era.png";
 import BackgroundText from "./common/Backtext";
-const Nowdays = [
-  {
-    id: 0,
-    text: "介護支援プラットフォーム",
-    class: "era_left",
-  },
-  {
-    id: 1,
-    text: "シニア向け住宅フォーム",
-    class: "era_left",
-  },
-  {
-    id: 2,
-    text: "家事代行・買い物代行",
-    class: "era_left",
-  },
-
-  {
-    id: 3,
-    text: "シニア向け趣味講座・ワークショップ",
-    class: "era_left",
-  },
-  {
-    id: 4,
-    text: "シニア向け旅行・観光パッケージ",
-    class: "era_right",
-  },
-  {
-    id: 5,
-    text: "シニア向け習い事教室",
-    class: "era_right",
-  },
-  {
-    id: 6,
-    text: "シニア向け食事宅配",
-    class: "era_right",
-  },
-  {
-    id: 7,
-    text: "シニア向けライフプラン相談",
-    class: "era_right",
-  },
-];
-const eras = [
-  {
-    id: 0,
-    src: "era-1.png",
-    alt: "オンライン内見",
-    caption: "オンライン内見",
-  },
-  {
-    id: 1,
-    src: "era-2.png",
-    alt: "オンライン診療",
-    caption: "オンライン診療",
-  },
-  {
-    id: 2,
-    src: "era-3.png",
-    alt: "オンライン交流会",
-    caption: "オンライン交流会",
-  },
-  {
-    id: 3,
-    src: "era-4.png",
-    alt: "オンライン体操教室",
-    caption: "オンライン体操教室",
-  },
-  {
-    id: 4,
-    src: "era-5.png",
-    alt: "オンライン見積もり",
-    caption: "オンライン見積もり",
-  },
-  {
-    id: 5,
-    src: "era-6.png",
-    alt: "オンライン読書会",
-    caption: "オンライン読書会",
-  },
-];
+import data from "./common/data.json";
+const Nowdays = data.Now;
+const eras = data.era;
 function Erap({ text }) {
   return (
     <>
@@ -97,7 +19,7 @@ function Erap({ text }) {
 }
 const Erasgallery = () => {
   return (
-    <div>
+    <div className="era_erasgallery">
       {eras.map((figure) => (
         <figure key={figure.id} className={figure.class}>
           <img src={figure.src} alt={figure.alt} />
@@ -147,15 +69,23 @@ function Era() {
             シニア向けのオンラインサービスは、すでに市場に浸透しつつあります...
           </p>
           <Erasgallery />
-          <BackgroundText x={1} />
-          <p className="era_senior-future">
-            <span>シニア</span>市場は急速に成長していますが <br />
-            オンラインサービスの普及はまだ<span>「芽生え始めた領域</span>
-          </p>
-          <p>
-            この<span>未成熟の領域</span>こそが大きな<span>チャンス</span>
-            と言えます。
-          </p>
+
+          <div className="era_senior-future">
+            <BackgroundText x={1} />
+            <p className="era_senior-future-text">
+              <span className="text-orange text-bold600">シニア市場</span>
+              は急速に成長していますが <br />
+              オンラインサービスの普及はまだ
+              <span className="text-bold600">「芽生え始めた領域」</span>
+            </p>
+            <p className="era_senior-future-chance">
+              この
+              <span className="text-blue">未成熟の領域</span>
+              こそが大きな
+              <span className="text-blue text-boldline">チャンス</span>
+              と言えます。
+            </p>
+          </div>
         </div>
       </div>
     </>

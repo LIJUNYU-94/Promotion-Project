@@ -9,6 +9,7 @@ import Concerns from "./js/Concerns";
 import Strengths from "./js/Strengths";
 import Try from "./js/Try";
 import Bottombtn from "./js/pc/Bottombtn";
+import Unique from "./js/UniqueFeatures";
 function App() {
   return (
     <div className="body">
@@ -20,6 +21,7 @@ function App() {
       <Concerns />
       <Strengths />
       <Try />
+      <Unique />
     </div>
   );
 }

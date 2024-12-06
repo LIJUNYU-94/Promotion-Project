@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import BackgroundText from "./common/Backtext";
 import Midashi from "./common/Midashi";
+import data from "./common/data.json";
 const compare = () => {
   return (
     <>
@@ -8,63 +9,89 @@ const compare = () => {
     </> //仮コンテンツ、表示調整用
   );
 };
-const strength = [
-  {
-    id: 0,
-    ttl: "コスト抑えたいならZION-MEET！",
-    btn: "料金プランをチェック",
-    tbl: { compare },
-    text: [
-      "圧倒的なコスパが良い！費用対効果を検討するの最優選！ビジネスプランは安価で",
-      "自社サーバー",
-      "に導入する可能！",
-    ],
-  },
-  {
-    id: 1,
-    ttl: "使いやすさと言えばZION-MEET！",
-    btn: "ZION-MEETを体験する",
-    img: "st-screen.png",
-    alt: "ZION-MEETの使用画面",
-    text: [
-      "登録不要！アプリダウンロード不要！だれでも",
-      "簡単に参加できる！",
-      "時間無制限！",
-    ],
-    sub: "※別ページへ遷移しません",
-  },
-  {
-    id: 2,
-    ttl: "カスタマイズすればZION-MEET！",
-    btn: "可能性の例をチェック",
-    img: "st-customize.png",
-    alt: "カストマイズ",
-    text: "ご利用ユーザーに合わせて、希望機能の追加も可能！",
-    sub: "※追加機能に応じて料金が発生します",
-  },
-];
+const strength = data.strength;
 
 const Strengthpart = () => {
   return (
     <>
       {strength.map((x) => (
-        <div key={x.id}>
-          <h3>{x.ttl}</h3>
-          <p>
-            {x.text[0]}
-            <span>{x.text[1]}</span>
-            {x.text[2]}
-          </p>
-          <p>{x.btn}</p>
-          <p>{x.sub || ""}</p>
-          <div>
-            {x.img === "" ? (
-              <div>{x.tbl}</div>
-            ) : (
-              <div>
-                <img src={x.img} alt={x.alt} />
-              </div>
-            )}
+        <div className="strengths_part" key={x.id}>
+          <div className="strengths_container">
+            <h3>{x.ttl}</h3>
+            <div className="strengths_part-left">
+              <p className="strengths_part-text">
+                {x.text[0].split("\n").map((line, i) => (
+                  <span key={i}>
+                    {line}
+                    {i < x.text[0].split("\n").length - 1 && <br />}{" "}
+                  </span>
+                ))}
+                <span className="text-blue">{x.text[1]}</span>
+                {x.text[2].split("\n").map((line, i) => (
+                  <span key={i}>
+                    {line}
+                    {i < x.text[2].split("\n").length - 1 && <br />}{" "}
+                  </span>
+                ))}
+              </p>
+              <p className="strengths_btn">
+                <a href="#">
+                  {x.btn}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="237"
+                    height="22"
+                    viewBox="0 0 237 22"
+                    fill="none"
+                  >
+                    <line
+                      y1="20.5"
+                      x2="235"
+                      y2="20.5"
+                      stroke="#FF9500"
+                      strokeWidth="3"
+                    />
+                    <line
+                      y1="-1.5"
+                      x2="26.0024"
+                      y2="-1.5"
+                      transform="matrix(0.682698 0.730701 -0.607506 0.794315 217.248 3)"
+                      stroke="#FF9500"
+                      strokeWidth="3"
+                    />
+
+                    <line
+                      y1="20.5"
+                      x2="235"
+                      y2="20.5"
+                      stroke="#21BA43"
+                      strokeWidth="3"
+                      className="hover-line"
+                    />
+                    <line
+                      y1="-1.5"
+                      x2="26.0024"
+                      y2="-1.5"
+                      transform="matrix(0.682698 0.730701 -0.607506 0.794315 217.248 3)"
+                      stroke="#21BA43"
+                      strokeWidth="3"
+                      className="hover-line"
+                    />
+                  </svg>
+                </a>
+              </p>
+              <p className="strengths_sub">{x.sub || ""}</p>
+            </div>
+
+            <div className="strengths_part-right">
+              {x.img === "" ? (
+                <div className="strengths_part-tbl">{x.tbl}</div>
+              ) : (
+                <div className="strengths_part-img">
+                  <img src={x.img} alt={x.alt} />
+                </div>
+              )}
+            </div>
           </div>
         </div>
       ))}
@@ -75,23 +102,33 @@ const Strengthpart = () => {
 const Cases = () => {
   return (
     <>
-      <div>
-        <img src="docomo.svg" alt="株式会社ドコモCS" />
-        <p>株式会社ドコモCS</p>
-        <p>導入業務</p>
-        <div>
-          <p>
-            シニア向けスマホ使い方講座 <br />
-            （一部の店舗）
-          </p>
-        </div>
-      </div>
-      <div>
-        <img src="ripty.svg" alt="株式会社リップル" />
-        <p>株式会社リップル</p>
-        <p>導入業務</p>
-        <div>
-          <p>入社の面談やリモート業務</p>
+      <div className="case">
+        <Midashi x={3} />
+        <BackgroundText x={2} />
+        <div className="case_container">
+          <div className="case_box case_left">
+            <figure>
+              <img src="docomo.svg" alt="株式会社ドコモCS" />
+              <figcaption>株式会社ドコモCS</figcaption>
+            </figure>
+            <p className="case_box-ttl">導入業務：</p>
+            <div className="case_box-text">
+              <p>
+                シニア向けスマホ使い方講座 <br />
+                <span>（一部の店舗）</span>
+              </p>
+            </div>
+          </div>
+          <div className="case_box case_right">
+            <figure>
+              <img src="ripty.svg" alt="株式会社リップル" />
+              <figcaption>株式会社リップル</figcaption>
+            </figure>
+            <p className="case_box-ttl">導入業務：</p>
+            <div className="case_box-text">
+              <p>入社の面談やリモート業務</p>
+            </div>
+          </div>
         </div>
       </div>
     </>
@@ -100,21 +137,14 @@ const Cases = () => {
 const Strengths = () => {
   return (
     <>
-      <div>
-        <p>
-          <span>そ</span>
-          <span>の</span>
-          <span>お</span>
-          <span>悩</span>
-          <span>み</span>
-        </p>
-      </div>
-      <div>
+      <div className="strengths">
+        <div className="strengths_top"></div>
         <Midashi x={2} />
-        <section>
+        <BackgroundText x={0} />
+        <section className="strengths_parts">
           <Strengthpart />
         </section>
-        <Midashi x={3} />
+
         <Cases />
       </div>
     </>

@@ -1,10 +1,18 @@
 @charset "utf-8";
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Megrim&family=Yusei+Magic&family=Zen+Maru+Gothic:wght@300;400;500;700;900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=ADLaM+Display&family=Megrim&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 /* --------------------------------------*
  * keyframes
  *-------------------------------------- */
-
+@keyframes line-flow {
+  from {
+    stroke-dashoffset: 300; /* 開始時は非表示 */
+  }
+  to {
+    stroke-dashoffset: 0; /* 終了時に全て表示 */
+  }
+}
 /* --------------------------------------*
  * 初期設定
  *-------------------------------------- */
@@ -47,6 +55,19 @@ body {
   font-size: 280px;
   font-weight: 400;
   white-space: nowrap;
+}
+.text-bold600 {
+  font-weight: 600;
+}
+.text-bold700 {
+  font-weight: 700;
+}
+.text-orange {
+  color: #ff9500;
+}
+.text-blue {
+  color: #0d7cbc;
+  font-weight: 600;
 }
 /* ボタンのラッパー */
 .buttons {
@@ -103,9 +124,20 @@ h2 {
   position: relative;
 }
 .ttl_bold {
+  font-family: "ADLaM Display";
+  font-size: 48px;
 }
 .ttl_boldline {
+  font-size: 48px;
+  font-weight: 600;
+  background-image: linear-gradient(
+    to top,
+    rgba(255, 149, 0, 0.9) 40%,
+    transparent 40%
+  );
+  background-size: 100% 90%;
 }
+
 .ttl_color {
   color: #0d7cbc;
   font-weight: 600;
@@ -122,6 +154,7 @@ h2 {
 }
 
 .ttl_white {
+  color: white;
 }
 
 .ttl_sub {
@@ -132,7 +165,10 @@ h2 {
   position: absolute;
   top: -20px;
   left: 5px;
+  width: 100%;
+  text-align: center;
 }
+
 /* --------------------------------------*
  * header
  *-------------------------------------- */
@@ -319,9 +355,9 @@ h1 {
 /* --------------------------------------*
  * era
  *-------------------------------------- */
-.era {
+.era .ttl_sub {
+  width: fit-content;
 }
-
 .era_now {
   margin-top: 181px;
   background-image: url(../img/era-now-bg25.png);
@@ -396,10 +432,7 @@ h1 {
 .era_left-column .era_now-text::before {
   transform: rotate(45deg);
 }
-/* .era_left-column .era_now-text:last-child::before {
-  transform: rotate(45deg);
-  left: 45%;
-} */
+
 .era_right-column .era_now-text::before {
   transform: rotate(-45deg);
 }
@@ -435,7 +468,7 @@ h1 {
   transform: translateX(-50%);
 }
 .era_now-stress-box {
-  top: -12px;
+  top: -11px;
   left: 13px;
   position: absolute;
   width: 140px;
@@ -472,17 +505,495 @@ h1 {
   font-size: 28px;
   font-weight: 700;
 }
+.era_now-stress::before,
+.era_now-stress::after {
+  content: "";
+  width: 80px;
+  border-top: 4px rgba(0, 0, 0, 0.69) solid;
+  position: absolute;
+  transform: rotate(60deg);
+  left: -100px;
+  bottom: 30px;
+}
+.era_now-stress::after {
+  transform: rotate(-60deg);
+  left: 539px;
+  bottom: 30px;
+}
+.era_senior {
+  padding-top: 149px;
+  padding-bottom: 117px;
+  position: relative;
+  background: rgba(13, 124, 188, 0.05);
+}
+.era_senior-phrase {
+  font-weight: 600;
+  margin-left: 5.7%;
+}
+.era_erasgallery {
+  display: flex;
+  justify-content: center;
+  gap: 2.5%;
+}
+.era_erasgallery figure {
+  position: relative;
+  width: 180px;
+  margin-top: 50px;
+  margin-bottom: 141px;
+}
+@media screen and (max-width: 1280px) {
+  .era_erasgallery figure {
+    width: 14%;
+  }
+}
+.era_senior-future .backtext-box {
+  top: 309px;
+}
+.era_erasgallery figure img {
+  width: 100%;
+}
+.era_erasgallery figure figcaption {
+  width: 100%;
+  position: absolute;
+  bottom: 5px;
+  text-align: center;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.era_senoir-future {
+  width: 100%;
+}
+.era_senior-future-text {
+  width: 100%;
+  text-align: center;
+}
+.era_senior-future-chance {
+  font-weight: 700;
+  margin-top: 29px;
+  width: 100%;
+  text-align: center;
+}
+
 /* --------------------------------------*
  * concerns
  *-------------------------------------- */
-
+.concerns {
+  margin-top: 138px;
+  margin-bottom: 184px;
+  position: relative;
+}
+.concerns_boxs {
+  margin-top: 217px;
+  display: flex;
+  justify-content: center;
+  gap: 3.5%;
+}
+.concerns_box {
+  border-radius: 10px;
+  border: 1px solid #989191;
+  background: #fff;
+  box-shadow: 2px 2px 2px 1px rgba(152, 145, 145, 0.7);
+  width: 27.3%;
+  max-width: 400px;
+  position: relative;
+}
+.concerns_box-text {
+  padding: 57px 10px 27px 18px;
+  width: 90.5%;
+  margin: 0 auto;
+}
+.concerns_box-text span {
+  font-weight: 500;
+  background-image: linear-gradient(
+    to top,
+    rgba(255, 149, 0, 0.4) 40%,
+    transparent 40%
+  );
+  background-size: 100% 90%;
+}
+.concerns_box-mark {
+  color: #fff;
+  font-family: Inter;
+  font-size: 36px;
+  font-weight: 600;
+  position: absolute;
+  padding: 22px 30px;
+  border-radius: 180px;
+  background-color: rgba(13, 124, 188, 0.95);
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.concerns_bottom {
+  position: absolute;
+  left: 50%;
+  bottom: -170px;
+  transform: translateX(-50%);
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: 1.96px;
+}
+.concerns_bottom span {
+  position: relative;
+}
+.concerns_bottom span::before {
+  position: absolute;
+  top: -30px;
+  left: -4px;
+  content: "・";
+  color: #ff9500;
+  font-size: 36px;
+  font-weight: 400;
+  letter-spacing: 1.12px;
+}
 /* --------------------------------------*
  * strengths
  *-------------------------------------- */
 
+.strengths {
+  overflow: hidden;
+  background: #0d7cbc;
+  position: relative;
+}
+.strengths h2 {
+  margin-top: 221px;
+  color: #fff;
+  position: relative;
+  z-index: 2;
+}
+.strengths .backtext-box {
+  top: 95px;
+  z-index: 1;
+}
+.strengths .backtext {
+  color: rgb(255, 255, 255, 0.15);
+}
+.strengths_top {
+  width: 744px;
+  height: 191px;
+  background-color: #fafcff;
+  clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+  position: absolute;
+  left: 50%;
+  top: -116px;
+  transform: translateX(-50%);
+}
+
+.strengths_parts {
+  margin-top: 135px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.strengths_part {
+  margin: 0 auto;
+  width: 70.3%;
+  min-width: 800px;
+
+  border-radius: 12px;
+  background: #fff;
+}
+.strengths_part h3 {
+  font-size: 28px;
+  font-weight: 600;
+  grid-column: 1/3;
+}
+.strengths_container {
+  width: 83%;
+  margin: 50px 0 30px 10%;
+  position: relative;
+  display: grid;
+  grid-template-columns: 42% 56%;
+  gap: 5%;
+  margin-top: 50px;
+}
+.strengths_container::before {
+  position: absolute;
+  top: -20px;
+  left: -50px;
+  content: "・";
+  color: #ff9500;
+  font-size: 56px;
+  font-weight: 400;
+}
+.strengths_part-left {
+  margin-top: 20px;
+}
+.strengths_btn {
+  position: absolute;
+  margin-top: 17px;
+  left: 0;
+  bottom: -10px;
+}
+
+.strengths_part:nth-of-type(2) .strengths_sub {
+  position: absolute;
+  bottom: -4px;
+  left: -16px;
+}
+.strengths_part:nth-of-type(2) .strengths_btn {
+  bottom: 20px;
+}
+.strengths_part:nth-of-type(2) .strengths_btn {
+  bottom: 20px;
+}
+.strengths_part:nth-of-type(2) .strengths_part-text {
+  margin-bottom: 80px;
+}
+.strengths_part:nth-of-type(3) .strengths_btn {
+  bottom: 10px;
+}
+.strengths_part:nth-of-type(3) .strengths_sub {
+  margin-top: 20px;
+}
+
+.strengths_btn svg {
+  position: absolute;
+  bottom: -2px;
+  left: -10px;
+  transition: stroke 0.3s ease-in-out;
+  z-index: 4;
+}
+.strengths_part:nth-of-type(2) .strengths_btn svg {
+  left: -2px;
+}
+
+.strengths_btn svg:hover .hover-line {
+  stroke-dashoffset: 0; /* 線を表示 */
+  animation: line-flow 1s linear forwards; /* アニメーション適用 */
+}
+.strengths_btn svg .hover-line {
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+  transition: stroke 0.3s ease-in-out;
+  pointer-events: none;
+}
+.strengths_btn a {
+  font-weight: 600;
+  color: #000;
+  cursor: pointer;
+  transition: text-shadow 0.3s ease, color 0.3s ease; /* スムーズなホバー効果 */
+}
+.strengths_btn:hover a {
+  text-shadow: 0 0.8px 1px #717070; /* ホバー時に影を追加 */
+}
+.strengths_sub {
+  font-size: 16px;
+  font-weight: 500;
+}
+.strengths_part-right {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+.strengths_part-img {
+  width: 100%;
+  text-align: center;
+}
+.strengths_part-img img {
+  width: 100%;
+}
+.strengths .case h2 {
+  margin-top: 119px;
+}
+.strengths .ttl_underline::after {
+  border-top: 5px solid #fff;
+}
+.case {
+  margin-top: 119px;
+  position: relative;
+}
+.case .backtext-box {
+  top: -110px;
+}
+.case_container {
+  margin-top: 169px;
+  display: flex;
+  justify-content: center;
+  gap: 16.8%;
+}
+.case_box {
+  padding-bottom: 75px;
+}
+.case_box figure {
+  width: 320px;
+  height: 150px;
+  border-bottom: 1px solid #000;
+  background: #fff;
+  box-shadow: 8px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  position: relative;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.case_box figure figcaption {
+  width: 100%;
+  position: absolute;
+  color: #fff;
+  text-align: center;
+  bottom: -45px;
+  font-weight: 600;
+  font-size: 24px;
+}
+.case_box figure img {
+  width: 200px;
+}
+.case_box-ttl {
+  margin-top: 66px;
+  color: #fff;
+  font-weight: 500;
+}
+.case_box-text {
+  position: relative;
+  margin: 24px 0 0 18px;
+  width: 311px;
+  height: 62px;
+  flex-shrink: 0;
+  border-radius: 5px 80px 80px 5px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.case_left .case_box-text p {
+  margin: 0 20px;
+}
+.case_right .case_box-text p {
+  width: 100%;
+  text-align: center;
+}
+.case_box-text p span {
+  display: block;
+  text-align: right;
+}
+.case_box-text::before {
+  position: absolute;
+  top: -8px;
+  left: -40px;
+  content: "・";
+  color: #ff9500;
+  font-size: 48px;
+  font-weight: 400;
+}
 /* --------------------------------------*
  * try
  *-------------------------------------- */
+
+.try {
+  width: 85.9%;
+  margin: 0 auto;
+  margin-top: 85px;
+  display: grid;
+  grid-template-columns: 78% 22%;
+  grid-template-rows: auto auto auto;
+}
+.try h2 {
+  grid-column: 1/3;
+  margin-bottom: 87px;
+}
+.try_text {
+  font-size: 16px;
+  font-weight: 500;
+}
+.try_text-green {
+  color: #21ba43;
+  font-weight: 700;
+  text-decoration: underline 2px solid;
+  cursor: pointer;
+}
+.try_switch {
+  justify-content: right;
+  display: flex;
+}
+.try_switch p {
+  align-self: center;
+  font-size: 20px;
+  font-weight: 600;
+}
+.try_switch-btn {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  align-items: center;
+  width: 120px;
+  height: 50px;
+  flex-shrink: 0;
+  border-radius: 40px;
+  background: #ff9500;
+  box-shadow: -4px 4px 8px 0px rgba(0, 0, 0, 0.25);
+}
+.try_switch-btn-circle {
+  width: 40px;
+  height: 40px;
+  background-color: #fff;
+  border-radius: 100px;
+  box-shadow: -4px 4px 8px rgba(0, 0, 0, 0.25);
+}
+.try_switch-btn-text {
+  width: 50px;
+  height: 29px;
+  padding-top: 3px;
+  flex-shrink: 0;
+  color: #fff;
+  text-align: center;
+  font-family: "Inter";
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+.try_container {
+  position: relative;
+  grid-column: 1/3;
+  margin-top: 38px;
+}
+.try_container img {
+  width: 100%;
+}
+.try_join {
+  position: absolute;
+  left: 50%;
+  top: -25px;
+  transform: translateX(-50%);
+  width: 258px;
+  height: 50px;
+  border-radius: 20px;
+  background: rgba(13, 124, 188, 0.97);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+.try_join label {
+  font-size: 16px;
+  color: #fff;
+  font-weight: 500;
+  padding-bottom: 3px;
+}
+.try_join input {
+  width: 113px;
+  background: none;
+  border: none;
+  border-bottom: white 2px solid;
+  outline: none;
+  color: white;
+}
+.try_join button {
+  border-radius: 2px;
+  border: 1px solid #000;
+  background: rgba(243, 243, 243, 0.8);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  flex-shrink: 0;
+  padding: 3px 10px;
+}
 
 /* --------------------------------------*
  * uniquefeatures
