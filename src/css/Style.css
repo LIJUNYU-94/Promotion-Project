@@ -13,6 +13,14 @@
     stroke-dashoffset: 0; /* 終了時に全て表示 */
   }
 }
+@keyframes backtext {
+  0% {
+    transform: translateX(20%); /* 右端から開始 */
+  }
+  100% {
+    transform: translateX(-97%); /* 左端まで移動 */
+  }
+}
 /* --------------------------------------*
  * 初期設定
  *-------------------------------------- */
@@ -20,8 +28,37 @@
   margin: 0;
   padding: 0;
 }
+*:before,
+*:after {
+  -webkit-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+html {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
 button {
   border: none;
+  cursor: pointer;
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.5;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  text-align: center;
+  vertical-align: middle;
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  color: #212529;
 }
 a {
   text-decoration: none;
@@ -48,13 +85,17 @@ body {
   position: absolute;
   overflow: hidden;
   z-index: -2;
+  white-space: nowrap;
 }
 .backtext {
-  color: rgba(13, 124, 188, 0.15);
+  color: rgba(13, 124, 188, 0.11);
   font-family: Inter;
   font-size: 280px;
   font-weight: 400;
   white-space: nowrap;
+  display: inline-block;
+  animation: backtext 20s linear infinite;
+  margin-right: 20%;
 }
 .text-bold600 {
   font-weight: 600;
@@ -69,7 +110,6 @@ body {
   color: #0d7cbc;
   font-weight: 600;
 }
-/* ボタンのラッパー */
 .buttons {
   display: flex;
   gap: 36px;
@@ -81,11 +121,23 @@ body {
   color: #fff;
   font-size: 16px;
   font-weight: 800;
-
   width: 200px;
   height: 60px;
   border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+  border: none;
   cursor: pointer;
+  transition: box-shadow 0.2s ease, transform 0.2s ease,
+    background-color 0.5s ease;
+  box-shadow: 4px 8px 18px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.08); /* 立体感を出す影 */
+}
+.buttons button:hover {
+  box-shadow: 2px 4px 9px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.06); /* 押し込まれたような影 */
+  transform: translateY(4px);
+}
+.buttons button:active {
+  transform: translateY(6px);
 }
 .buttons_contact {
   background: #ff9500;
@@ -93,13 +145,22 @@ body {
 .buttons_download {
   background: #21ba43;
 }
+
+.buttons_contact:hover {
+  background-color: #0d7cbc;
+}
+.buttons_download:hover {
+  background-color: #0d7cbc;
+}
+
 .sticky-buttons {
-  width: 100%;
+  width: 362px;
   display: flex;
   justify-content: center;
   position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
   top: calc(100vh - 90px);
-  left: 0;
   z-index: 9;
 }
 .sticky-button {
@@ -160,13 +221,14 @@ h2 {
 .ttl_sub {
   color: rgba(0, 0, 0, 0.8);
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: 0.8px;
   position: absolute;
   top: -20px;
-  left: 5px;
-  width: 100%;
-  text-align: center;
+  left: 50%;
+  width: fit-content;
+  transform: translateX(-50%);
+  white-space: nowrap;
 }
 
 /* --------------------------------------*
@@ -211,6 +273,9 @@ header {
 header .buttons {
   margin-top: 49px;
   margin-right: 6%;
+}
+header .buttons button::before {
+  background: rgb(215, 209, 209);
 }
 /* --------------------------------------*
  * kv
@@ -287,8 +352,11 @@ h1 {
   flex-shrink: 0;
   align-items: center;
   z-index: 8;
+  transition: transform 0.4s ease;
 }
-.navpc_button {
+.navpc_button,
+.navpc_button-close {
+  cursor: pointer;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -298,9 +366,40 @@ h1 {
   border-top: 1px solid rgba(0, 0, 0, 0.8);
   border-bottom: 1px solid rgba(0, 0, 0, 0.8);
   border-left: 1px solid rgba(0, 0, 0, 0.8);
-  background: rgba(250, 252, 255, 0.4);
+  position: relative;
+  overflow: hidden;
 }
-.navpc_button-text {
+.navpc_button:hover,
+.navpc_button-close:hover {
+  background: rgba(128, 128, 128, 0.2);
+}
+.navpc_button::after,
+.navpc_button-close::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(128, 128, 128, 0.2);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease-in-out;
+  z-index: 1;
+}
+.navpc_button-close::after {
+  transform-origin: right;
+}
+
+.navpc_button:hover::after,
+.navpc_button-close:hover::after {
+  transform: scaleX(1);
+}
+.navpc_button {
+  background: rgba(250, 252, 255, 0.2);
+}
+.navpc_button-text,
+.navpc_button-text-close {
   text-align: center;
   font-size: 9px;
   font-weight: 900;
@@ -316,10 +415,17 @@ h1 {
   top: -9px;
   left: 11px;
 }
+.navpc_button-text-close::before {
+  font-weight: 500;
+  font-size: 12px;
+  content: "←";
+  position: absolute;
+  top: -9px;
+  left: 11px;
+}
 .navpc_ul {
   height: 100%;
   width: 108px;
-
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -327,6 +433,10 @@ h1 {
   border: 1px solid #fafcff;
   background: rgba(13, 124, 188, 0.8);
   justify-content: space-between;
+  transition: background-color 0.3s ease;
+}
+.navpc_ul.hovered {
+  background: rgba(13, 124, 188, 1);
 }
 .navpc_li {
   width: fit-content;
@@ -343,6 +453,16 @@ h1 {
   font-weight: 400;
   color: #fff;
 }
+.navpc.hidden {
+  display: none;
+}
+.navpc_ul.open {
+  transform: translateX(0); /* UL が表示された状態 */
+}
+
+.navpc.closed {
+  transform: translateX(110px); /* UL を画面外にスライド */
+}
 
 /* --------------------------------------*
  * headersp
@@ -356,7 +476,8 @@ h1 {
  * era
  *-------------------------------------- */
 .era .ttl_sub {
-  width: fit-content;
+  left: 15%;
+  font-weight: 700;
 }
 .era_now {
   margin-top: 181px;
@@ -762,8 +883,8 @@ h1 {
 }
 
 .strengths_btn svg:hover .hover-line {
-  stroke-dashoffset: 0; /* 線を表示 */
-  animation: line-flow 1s linear forwards; /* アニメーション適用 */
+  stroke-dashoffset: 0;
+  animation: line-flow 1s linear forwards;
 }
 .strengths_btn svg .hover-line {
   stroke-dasharray: 300;
@@ -775,10 +896,10 @@ h1 {
   font-weight: 600;
   color: #000;
   cursor: pointer;
-  transition: text-shadow 0.3s ease, color 0.3s ease; /* スムーズなホバー効果 */
+  transition: text-shadow 0.3s ease, color 0.3s ease;
 }
 .strengths_btn:hover a {
-  text-shadow: 0 0.8px 1px #717070; /* ホバー時に影を追加 */
+  text-shadow: 0 0.8px 1px #717070;
 }
 .strengths_sub {
   font-size: 16px;
@@ -927,7 +1048,13 @@ h1 {
   flex-shrink: 0;
   border-radius: 40px;
   background: #ff9500;
+  transition: background-color 0.8s ease-in-out;
   box-shadow: -4px 4px 8px 0px rgba(0, 0, 0, 0.25);
+}
+.try_switch-btn.on {
+  background-color: #21ba43;
+  transition: all 0.8s ease-in-out;
+  flex-direction: row-reverse;
 }
 .try_switch-btn-circle {
   width: 40px;
@@ -935,7 +1062,13 @@ h1 {
   background-color: #fff;
   border-radius: 100px;
   box-shadow: -4px 4px 8px rgba(0, 0, 0, 0.25);
+  transition: transform 0.5s ease-in-out, background-color 1s ease;
 }
+.try_switch-btn-circle:hover {
+  transform: scale(1.05);
+  background-color: #e7e5e5;
+}
+
 .try_switch-btn-text {
   width: 50px;
   height: 29px;
@@ -994,15 +1127,498 @@ h1 {
   flex-shrink: 0;
   padding: 3px 10px;
 }
-
 /* --------------------------------------*
  * uniquefeatures
  *-------------------------------------- */
+.unique {
+  width: 100%;
+  margin-top: 130px;
+  position: relative;
+}
+.unique .backtext-box {
+  position: absolute;
+  top: -38px;
+}
+.unique_container {
+  margin-top: 175px;
+}
+.unique_part {
+  text-align: center;
+}
+.unique_part .unique_img {
+  width: 75%;
+  min-width: 860px;
+  max-width: 1280px;
+}
+.unique_part-ttl {
+  width: fit-content;
+  margin: 0 auto;
+  font-weight: 600;
+  margin-bottom: 80px;
+  margin-top: 100px;
+}
+.unique_partc {
+  width: 79%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.unique_part-eg {
+  font-size: 28px;
+  font-weight: 600;
+  text-align: left;
+}
+.unique_part-customize {
+  display: flex;
+  justify-content: center;
+  margin: 19px auto;
+  gap: 6%;
+}
+.unique_part-customize figure {
+  width: 29%;
+  position: relative;
+}
+.unique_part-customize figure img {
+  width: 100%;
+}
+.unique_part-customize figure figcaption {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -43px;
+  width: fit-content;
+  white-space: nowrap;
+}
+.unique_part-sub {
+  position: absolute;
+  bottom: -97px;
+  right: 3%;
+  font-size: 16px;
+  font-weight: 500;
+}
+/* --------------------------------------*
+ * price
+ *-------------------------------------- */
+.price {
+  margin-top: 198px;
+  position: relative;
+}
+.price .backtext-box {
+  top: -95px;
+}
+.price_container {
+  background-image: url(../img/price-bg.png);
+
+  width: 88.75%;
+  margin: 185px auto 0;
+  padding-bottom: 144px;
+  border-radius: 15px;
+  border: 1px solid #000;
+  position: relative;
+}
+.price_text {
+  color: #fff;
+  font-size: 24px;
+  font-weight: 700;
+  padding: 32px 0 35px 6.5%;
+  letter-spacing: 0.05em;
+}
+.price_plan-container {
+  margin: 0 6.5%;
+  display: flex;
+  justify-content: center;
+  gap: 12%;
+}
+.price_plan {
+  border-radius: 20px;
+  border: 1px solid #000;
+  background: #fff;
+  width: 44%;
+}
+.price_plan-ttl {
+  font-size: 32px;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 39px;
+}
+.price_plan-ttl span {
+  position: relative;
+  z-index: 1;
+}
+.price_plan-ttl span::before {
+  content: "";
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  width: 100%;
+  height: 23%;
+  z-index: -1;
+  background-image: linear-gradient(
+    to top,
+    rgba(33, 186, 67, 0.8) 100%,
+    transparent 100%
+  );
+  background-size: 100% 90%;
+  border-radius: 2px 4px 4px 2px;
+}
+.price_plan-business .price_plan-ttl span::before {
+  background-image: linear-gradient(
+    to top,
+    rgba(255, 149, 0, 0.8) 100%,
+    transparent 100%
+  );
+}
+.price_plan img {
+  display: block;
+  margin: 17px auto 7px;
+  width: 41.4%;
+}
+.price_plan-price {
+  font-size: 24px;
+  text-align: center;
+}
+.price_plan-price span:nth-child(1) {
+  position: relative;
+  font-weight: 600;
+}
+.price_plan-price span:nth-child(2) {
+  color: #21ba43;
+  font-size: 36px;
+  font-weight: 600;
+}
+.price_plan-price span:nth-child(3) {
+  font-size: 36px;
+}
+.price_plan-business .price_plan-price span:nth-child(2) {
+  color: #ff9500;
+  font-size: 36px;
+  font-weight: 600;
+}
+
+.price_plan-cp {
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  margin: 8px 0;
+}
+.price_plan-text {
+  width: 80%;
+  margin: 17px auto 25px;
+  position: relative;
+  font-weight: 500;
+}
+.price_plan-text::before {
+  position: absolute;
+  top: -8px;
+  left: -25px;
+  content: "・";
+
+  color: #21ba43;
+  font-size: 32px;
+  font-weight: 600;
+}
+.price_plan-business .price_plan-text::before {
+  color: #ff9500;
+}
+.price_sub {
+  position: absolute;
+  left: 6.5%;
+  bottom: 40px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+}
+.price_button {
+  color: #fff;
+  width: 280px;
+  padding: 18px 0 21px;
+  text-align: center;
+  font-weight: 800;
+  font-size: 16px;
+  position: absolute;
+  right: 6.5%;
+  bottom: 40px;
+  border-radius: 10px;
+  background: #ff9500;
+}
+.price_button svg {
+  position: absolute;
+  top: 19px;
+  right: 4px;
+}
 
 /* --------------------------------------*
- * pricestepqa
+ * step
  *-------------------------------------- */
+.step {
+  margin-top: 111px;
+}
+.step_container {
+  background-image: url(../img/step-bg1.png);
+  background-size: cover;
+  width: 88.75%;
+  margin: 206px auto 0;
+  border-radius: 15px;
+  position: relative;
+  height: 700px;
+  display: grid;
+  grid-template-columns: 0.4fr 466px 1fr 670px 0.6fr;
+}
 
+.step_container-left {
+  height: 700px;
+}
+.step_container-left h3 {
+  color: #fff;
+  width: fit-content;
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: 2.24px;
+  margin-top: 157px;
+  margin-left: 36.26%;
+  white-space: nowrap;
+}
+.step_container-left p {
+  margin-top: 75px;
+  margin-left: 31.115%;
+  display: flex;
+  justify-content: center;
+  width: 260px;
+  height: 260px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #fff;
+  color: #0d7cbc;
+  text-align: center;
+  font-family: Inter, sans-serif;
+  font-size: 48px;
+  align-items: center;
+}
+.step_container-right {
+  height: 700px;
+  position: relative;
+  z-index: 2;
+}
+.step_container-right svg {
+  position: absolute;
+  top: -4px;
+  z-index: -1;
+}
+.step_listnum li {
+  position: absolute;
+  color: #0d7cbc;
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: 3.2px;
+  width: 100px;
+  height: 100px;
+  flex-shrink: 0;
+  background-color: #f2f2f2;
+  border-radius: 50%;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.step_steplist li {
+  position: absolute;
+  width: fit-content;
+  height: 90px;
+  padding: 0 35px;
+  border-radius: 20px;
+  background: #fff;
+  color: #0d7cbc;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.step_listnum li:nth-child(1) {
+  top: 12px;
+  left: 10px;
+}
+.step_listnum li:nth-child(2) {
+  top: 194px;
+  left: 110px;
+}
+.step_listnum li:nth-child(3) {
+  top: 388px;
+  left: 110px;
+}
+.step_listnum li:nth-child(4) {
+  top: 574px;
+  left: 10px;
+}
+
+.step_steplist li:nth-child(1) {
+  top: 12px;
+  left: 160px;
+}
+.step_steplist li:nth-child(2) {
+  top: 194px;
+  left: 260px;
+}
+.step_steplist li:nth-child(3) {
+  top: 388px;
+  left: 260px;
+}
+.step_steplist li:nth-child(4) {
+  top: 574px;
+  left: 160px;
+}
+.step_steplist li::before {
+  content: url(../img/step-tri.svg);
+  position: absolute;
+  left: -20px;
+  top: 28px;
+}
+@media screen and (max-width: 1279px) {
+  .step_container {
+    grid-template-columns: auto 650px;
+    width: 90%;
+  }
+  .step_container-empty {
+    display: none;
+  }
+  .step_container-left h3 {
+    margin-left: 20%;
+  }
+  .step_container-left p {
+    margin-left: 20%;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .step_container-left p {
+    width: 200px;
+    height: 200px;
+    margin-left: 18%;
+  }
+  .step_container-left h3 {
+    margin-left: 18%;
+  }
+}
+/* --------------------------------------*
+ * faq
+ *-------------------------------------- */
+.faq {
+  margin-top: 125px;
+  position: relative;
+}
+.faq .backtext-box {
+  top: -177px;
+}
+.faq_box {
+  margin: 193px auto 113px;
+  width: 75%;
+}
+.faq_container {
+  border-bottom: 2px solid #ff9500;
+  margin-bottom: 31px;
+}
+.faq-question {
+  font-size: 24px;
+  font-weight: 500;
+  padding-bottom: 5px;
+  margin-left: 20px;
+  position: relative;
+}
+.faq-q {
+  margin-right: 1%;
+  color: #ff9500;
+  font-size: 48px;
+  font-family: Inter;
+  font-weight: 600;
+}
+.faq-toggle {
+  color: #ff9500;
+  font-size: 36px;
+  font-weight: 700;
+  position: absolute;
+  right: 1%;
+  top: 11px;
+}
+.faq-answer {
+  margin-left: 64px;
+  margin-bottom: 5px;
+}
 /* --------------------------------------*
  * footer
  *-------------------------------------- */
+.footer {
+  background: #0d7cbc;
+  height: 592px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  text-align: center;
+}
+.footer_left {
+  margin: 77.5px 20.8% 77.5px 24.8%;
+  min-width: 343px;
+  border-radius: 20px;
+  background: #fafcff;
+}
+
+.footer_logo {
+  display: block;
+  width: 150px;
+  margin: 36px auto 30px;
+}
+
+.footer_left-cp {
+  margin-bottom: 39px;
+}
+
+.footer_left-name {
+  font-weight: 600;
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+
+.footer_left-copyright small {
+  font-size: 16px;
+  letter-spacing: 0.32px;
+}
+
+.footer_right {
+  margin-top: 77.5px;
+  position: relative;
+  right: 8%;
+}
+
+.footer_right-name {
+  margin-bottom: 28px;
+  color: #fff;
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.footer_right-cp {
+  color: #fff;
+  font-weight: 300;
+}
+
+.footer_right-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  width: 39%;
+  margin: 59px auto 65px;
+  gap: 28px 89px;
+}
+.footer_right-nav-left {
+  text-align: right;
+}
+.footer_right-nav-right {
+  text-align: left;
+}
+.footer_right-nav li a {
+  color: #fff;
+  font-weight: 400;
+}
+.footer_right .buttons {
+  justify-content: center;
+  gap: 89px;
+}

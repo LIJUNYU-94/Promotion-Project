@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Midashi from "./common/Midashi";
-import eraphoto from "../img/era.png";
 import BackgroundText from "./common/Backtext";
+import eraphoto from "../img/era.png";
 import data from "./common/data.json";
 const Nowdays = data.Now;
 const eras = data.era;

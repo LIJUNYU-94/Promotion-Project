@@ -12,6 +12,7 @@ function BackgroundText({ x }) {
   return (
     <div className="backtext-box">
       <p className="backtext">{BackgroundTexts[x]}</p>
+      <p className="backtext">{BackgroundTexts[x]}</p>
     </div>
   );
 }

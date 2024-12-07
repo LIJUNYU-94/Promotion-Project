@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import Btn from "../common/Btn";
+import useScrollVisibility from "../common/ScrollVisibility";
 function Header() {
+  const isVisible = useScrollVisibility(0.95);
   return (
     <>
       <header>

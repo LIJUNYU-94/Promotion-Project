@@ -1,12 +1,41 @@
 import { useState, useEffect } from "react";
+import useScrollVisibility from "../common/ScrollVisibility";
 function Nav() {
+  const isVisible = useScrollVisibility(0.99);
+  const [isNavOpen, setIsNavOpen] = useState(true);
+  const [isHovering, setIsHovering] = useState(false);
+  const toggleNav = () => {
+    setIsNavOpen(!isNavOpen);
+  };
+  const handleMouseEnter = () => setIsHovering(true);
+  const handleMouseLeave = () => setIsHovering(false);
   return (
     <>
-      <nav className="navpc">
-        <div className="navpc_button">
-          <p className="navpc_button-text">menu</p>
+      <nav
+        className={`navpc ${isVisible ? "" : "hidden"} ${
+          isNavOpen ? "" : "closed"
+        }`}
+      >
+        <div
+          className={` ${isNavOpen ? "navpc_button" : "navpc_button-close"}`}
+          onClick={toggleNav}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          <p
+            className={` ${
+              isNavOpen ? "navpc_button-text" : "navpc_button-text-close"
+            }`}
+          >
+            menu
+          </p>
         </div>
-        <ul className="navpc_ul">
+
+        <ul
+          className={`navpc_ul ${isNavOpen ? "open" : "closed"} ${
+            isHovering ? "hovered" : ""
+          }`}
+        >
           <li className="navpc_li">
             <a href="#">今の時代</a>
           </li>

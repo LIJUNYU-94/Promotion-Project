@@ -6,6 +6,7 @@ function Try() {
   const toggleMode = () => {
     change((x) => (x === "OFF" ? "ON" : "OFF"));
   };
+
   return (
     <>
       <section className="try">
@@ -22,7 +23,10 @@ function Try() {
         </div>
         <div className="try_switch">
           <p>体験モード：</p>
-          <div onClick={toggleMode} className="try_switch-btn">
+          <div
+            onClick={toggleMode}
+            className={`try_switch-btn ${mode === "ON" ? "on" : ""}`}
+          >
             <div className="try_switch-btn-circle"></div>
             <div className="try_switch-btn-text">{mode}</div>
           </div>
