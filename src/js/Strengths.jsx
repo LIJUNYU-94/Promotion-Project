@@ -2,13 +2,8 @@ import { useState, useEffect } from "react";
 import BackgroundText from "./common/Backtext";
 import Midashi from "./common/Midashi";
 import data from "./common/data.json";
-const compare = () => {
-  return (
-    <>
-      <div style={{ backgroundColor: green }}></div>
-    </> //仮コンテンツ、表示調整用
-  );
-};
+import Compare from "./pc/Compare.jsx";
+
 const strength = data.strength;
 
 const Strengthpart = () => {
@@ -85,7 +80,7 @@ const Strengthpart = () => {
 
             <div className="strengths_part-right">
               {x.img === "" ? (
-                <div className="strengths_part-tbl">{x.tbl}</div>
+                <Compare />
               ) : (
                 <div className="strengths_part-img">
                   <img src={x.img} alt={x.alt} />
