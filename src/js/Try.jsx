@@ -55,7 +55,7 @@ function Try() {
 
   return (
     <>
-      <section className="try">
+      <div className="try" id="try">
         <Midashi x={4} />
         <div className="try_text">
           <p>
@@ -107,7 +107,7 @@ function Try() {
             )}
           </div>
         </div>
-      </section>
+      </div>
     </>
   );
 }

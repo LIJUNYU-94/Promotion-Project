@@ -1,10 +1,20 @@
 import { useState, useEffect } from "react";
 import Midashi from "./common/Midashi";
 import BackgroundText from "./common/Backtext";
+import { useInView } from "react-intersection-observer";
+
 function Price() {
+  const { ref, inView } = useInView({
+    threshold: 0.2, // 20%見えたらトリガー
+    triggerOnce: true, // 一度だけトリガー
+  });
   return (
     <>
-      <section className="price">
+      <section
+        ref={ref}
+        id="price"
+        className={`price ${inView ? "visible" : "hidden"}`}
+      >
         <Midashi x={6}></Midashi>
         <BackgroundText x={4} />
         <div className="price_container">

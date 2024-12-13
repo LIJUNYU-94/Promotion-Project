@@ -166,6 +166,7 @@
       "id": 0,
       "ttl": "コスト抑えたいならZION-MEET！",
       "btn": "料金プランをチェック",
+      "btnlink": "price",
       "img": "",
       "text": [
         "圧倒的なコスパが良い！\n費用対効果を検討するの最優選！\nビジネスプランは安価で",
@@ -177,6 +178,7 @@
       "id": 1,
       "ttl": "使いやすさと言えばZION-MEET！",
       "btn": "ZION-MEETを体験する",
+      "btnlink": "try",
       "img": "st-screen2.png",
       "alt": "ZION-MEETの使用画面",
       "text": [
@@ -190,6 +192,7 @@
       "id": 2,
       "ttl": "カスタマイズすればZION-MEET！",
       "btn": "可能性の例をチェック",
+      "btnlink": "customize",
       "img": "st-customize.png",
       "alt": "カストマイズ",
       "text": ["ご利用ユーザーに合わせて、\n希望機能の追加も可能！", "", ""],

@@ -3,12 +3,19 @@ import React from "react"; // 必要に応じてReactをインポート
 import Midashi from "./common/Midashi";
 import BackgroundText from "./common/Backtext";
 import data from "./common/data.json";
-
+import { useInView } from "react-intersection-observer";
 const concernText = data.concern;
 const Concerns = () => {
+  const { ref, inView } = useInView({
+    threshold: 0.2, // 20%見えたらトリガー
+    triggerOnce: true, // 一度だけトリガー
+  });
   return (
     <>
-      <div className="concerns">
+      <section
+        ref={ref}
+        className={`concerns ${inView ? "visible" : "hidden"}`}
+      >
         <Midashi x={1} />
         <div className="concerns_boxs">
           {concernText.map((x) => {
@@ -31,7 +38,7 @@ const Concerns = () => {
           <span>悩</span>
           <span>み</span>
         </p>
-      </div>
+      </section>
       <BackgroundText x={1} />
     </>
   );

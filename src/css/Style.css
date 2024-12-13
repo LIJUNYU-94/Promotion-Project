@@ -39,6 +39,37 @@ html {
   box-sizing: border-box;
   font-size: 62.5%;
 }
+.era,
+.concerns,
+.faq,
+.kv,
+.price,
+.step,
+.unique {
+  opacity: 0;
+  transform: translateY(80px);
+  transition: transform 1s ease-out, opacity 1s ease-out;
+}
+.era.visible,
+.concerns.visible,
+.faq.visible,
+.kv.visible,
+.price.visible,
+.step.visible,
+.unique.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.era.hidden,
+.concerns.hidden,
+.faq.hidden,
+.kv.hidden,
+.price.hidden,
+.step.hidden,
+.unique.hidden {
+  opacity: 0;
+  transform: translateY(80px);
+}
 button {
   border: none;
   cursor: pointer;
@@ -229,6 +260,41 @@ h2 {
   width: fit-content;
   transform: translateX(-50%);
   white-space: nowrap;
+}
+.backtotop p {
+  color: white;
+  font-weight: 900;
+  letter-spacing: 1px;
+  width: fit-content;
+  height: fit-content;
+  font-size: 28px;
+}
+
+.backtotop {
+  position: fixed;
+  bottom: 15px;
+  right: 2%;
+  z-index: 15;
+  cursor: pointer;
+  transition: opacity 0.5s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 60px;
+  height: 60px;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  opacity: 0.6;
+  background: #0d7cbc;
+  border: 1px solid #555;
+  border-radius: 60px;
+  box-shadow: 2px 3px 3px rgb(0 0 0 / 50%);
+}
+
+.backtotop:hover {
+  opacity: 1;
+  transform: scale(0.9);
 }
 
 /* --------------------------------------*
@@ -1788,6 +1854,7 @@ table .bold {
   padding-bottom: 5px;
   margin-left: 20px;
   position: relative;
+  cursor: pointer;
 }
 .faq-q {
   margin-right: 1%;
@@ -1841,7 +1908,9 @@ table .bold {
   font-size: 24px;
   margin-bottom: 30px;
 }
-
+.footer_left-name a {
+  color: black;
+}
 .footer_left-copyright small {
   font-size: 16px;
   letter-spacing: 0.32px;

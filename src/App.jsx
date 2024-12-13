@@ -14,6 +14,7 @@ import Price from "./js/Price";
 import Step from "./js/Step";
 import Faq from "./js/Faq";
 import Footer from "./js/pc/footer";
+import Backtotop from "./js/common/backtotop";
 function App() {
   return (
     <div className="body">
@@ -30,6 +31,7 @@ function App() {
       <Step />
       <Faq />
       <Footer />
+      <Backtotop />
     </div>
   );
 }

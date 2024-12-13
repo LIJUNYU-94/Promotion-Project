@@ -3,6 +3,7 @@ import BackgroundText from "./common/Backtext";
 import Midashi from "./common/Midashi";
 import data from "./common/data.json";
 import Compare from "./pc/Compare.jsx";
+import { useInView } from "react-intersection-observer";
 
 const strength = data.strength;
 
@@ -30,7 +31,7 @@ const Strengthpart = () => {
                 ))}
               </p>
               <p className="strengths_btn">
-                <a href="#">
+                <a href={`#${x.btnlink}`}>
                   {x.btn}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -130,15 +131,19 @@ const Cases = () => {
   );
 };
 const Strengths = () => {
+  const { ref, inView } = useInView({
+    threshold: 0.2, // 20%見えたらトリガー
+    triggerOnce: true, // 一度だけトリガー
+  });
   return (
     <>
-      <div className="strengths">
+      <div className="strengths" id="strengths">
         <div className="strengths_top"></div>
         <Midashi x={2} />
         <BackgroundText x={0} />
-        <section className="strengths_parts">
+        <div className="strengths_parts">
           <Strengthpart />
-        </section>
+        </div>
 
         <Cases />
       </div>

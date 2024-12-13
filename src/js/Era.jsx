@@ -3,6 +3,7 @@ import Midashi from "./common/Midashi";
 import BackgroundText from "./common/Backtext";
 import eraphoto from "../img/era.png";
 import data from "./common/data.json";
+import { useInView } from "react-intersection-observer";
 const Nowdays = data.Now;
 const eras = data.era;
 function Erap({ text }) {
@@ -30,9 +31,17 @@ const Erasgallery = () => {
   );
 };
 function Era() {
+  const { ref, inView } = useInView({
+    threshold: 0.2, // 20%見えたらトリガー
+    triggerOnce: true, // 一度だけトリガー
+  });
   return (
     <>
-      <div className="era">
+      <section
+        ref={ref}
+        id="era"
+        className={`era ${inView ? "visible" : "hidden"}`}
+      >
         <Midashi x={0} />
         <div className="era_now">
           <img src={eraphoto} alt="シニアの市場なう" />
@@ -87,7 +96,7 @@ function Era() {
             </p>
           </div>
         </div>
-      </div>
+      </section>
     </>
   );
 }

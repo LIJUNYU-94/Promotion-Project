@@ -1,9 +1,18 @@
 import { useState, useEffect } from "react";
 import Midashi from "./common/Midashi";
+import { useInView } from "react-intersection-observer";
 function Step() {
+  const { ref, inView } = useInView({
+    threshold: 0.2, // 20%見えたらトリガー
+    triggerOnce: true, // 一度だけトリガー
+  });
   return (
     <>
-      <section className="step">
+      <section
+        ref={ref}
+        id="step"
+        className={`step ${inView ? "visible" : "hidden"}`}
+      >
         <Midashi x={7} />
 
         <div className="step_container">

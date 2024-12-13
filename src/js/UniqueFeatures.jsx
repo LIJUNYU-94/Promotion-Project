@@ -1,11 +1,20 @@
 import { useState, useEffect } from "react";
 import Midashi from "./common/Midashi";
 import BackgroundText from "./common/Backtext";
+import { useInView } from "react-intersection-observer";
 
 function Unique() {
+  const { ref, inView } = useInView({
+    threshold: 0.2, // 20%見えたらトリガー
+    triggerOnce: true, // 一度だけトリガー
+  });
   return (
     <>
-      <section className="unique">
+      <section
+        ref={ref}
+        id="unique"
+        className={`unique ${inView ? "visible" : "hidden"}`}
+      >
         <Midashi x={5} />
         <BackgroundText x={3} />
         <div className="unique_container">
@@ -30,7 +39,7 @@ function Unique() {
             />
           </div>
           <div className="unique_partc">
-            <p className="unique_part-ttl">
+            <p className="unique_part-ttl" id="customize">
               カスタマイズ（ビジネスプランのみ）
             </p>
             <p className="unique_part-eg">例：</p>

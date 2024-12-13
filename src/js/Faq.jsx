@@ -2,17 +2,16 @@ import { useState, useEffect } from "react";
 import Midashi from "./common/Midashi";
 import BackgroundText from "./common/Backtext";
 import data from "./common/data.json";
+import { useInView } from "react-intersection-observer";
 const faqs = data.faqs;
 function FAQItem({ question, answer, isOpen, onToggle }) {
   return (
     <>
       <div className="faq_container">
-        <p className="faq-question">
+        <p className="faq-question" onClick={onToggle}>
           <span className="faq-q">Q</span>
           {question}
-          <span className="faq-toggle" onClick={onToggle}>
-            {isOpen ? "−" : "+"}
-          </span>
+          <span className="faq-toggle">{isOpen ? "−" : "+"}</span>
         </p>
 
         {isOpen && <div className="faq-answer">{answer}</div>}
@@ -26,8 +25,16 @@ const Faq = () => {
   const handle = (x) => {
     handler(active === x ? null : x);
   };
+  const { ref, inView } = useInView({
+    threshold: 0.2, // 20%見えたらトリガー
+    triggerOnce: true, // 一度だけトリガー
+  });
   return (
-    <section className="faq">
+    <section
+      ref={ref}
+      id="faq"
+      className={`faq ${inView ? "visible" : "hidden"}`}
+    >
       <Midashi x={8} />
       <BackgroundText x={5} />
       <div className="faq_box">

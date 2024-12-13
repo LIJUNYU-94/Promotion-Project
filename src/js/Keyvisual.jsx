@@ -1,9 +1,14 @@
 import { useState, useEffect } from "react";
 import BackgroundText from "./common/Backtext";
+import { useInView } from "react-intersection-observer";
 function Keyvisual() {
+  const { ref, inView } = useInView({
+    threshold: 0.2, // 20%見えたらトリガー
+    triggerOnce: true, // 一度だけトリガー
+  });
   return (
     <>
-      <div className="kv">
+      <section ref={ref} className={`kv ${inView ? "visible" : "hidden"}`}>
         <h1>
           今こそ掴む、
           <br /> 時代のチャンスを <br />
@@ -23,7 +28,7 @@ function Keyvisual() {
             </p>
           </div>
         </div>
-      </div>
+      </section>
     </>
   );
 }
