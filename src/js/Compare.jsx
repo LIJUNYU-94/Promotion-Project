@@ -5,6 +5,7 @@ const Table = () => {
   const toggleOpen = () => {
     setIsOpen((prev) => !prev);
   };
+
   useEffect(() => {
     const handleScroll = () => {
       if (isOpen) {
@@ -128,7 +129,7 @@ const Cals = () => {
   };
 
   return (
-    <div className="complare-calc-container">
+    <div className="compare-calc-container">
       <div className="complare-calc-left">
         <form>
           <label htmlFor="user-count">ユーザー数：</label>

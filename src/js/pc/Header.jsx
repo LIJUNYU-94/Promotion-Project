@@ -9,7 +9,7 @@ function Header() {
         <div className="header_left">
           <img className="header_logo" src="logo.png" alt="zion-logo" />
           <p className="header_ttl">
-            ZION-MEET{" "}
+            ZION-MEET
             <span className="header_subttl">
               ～だれでも、簡単で自由な会議を～
             </span>

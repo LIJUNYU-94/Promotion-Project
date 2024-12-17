@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import BackgroundText from "./common/Backtext";
 import Midashi from "./common/Midashi";
 import data from "./common/data.json";
-import Compare from "./pc/Compare.jsx";
+import Compare from "./Compare.jsx";
 import { useInView } from "react-intersection-observer";
 
 const strength = data.strength;
@@ -19,14 +19,14 @@ const Strengthpart = () => {
                 {x.text[0].split("\n").map((line, i) => (
                   <span key={i}>
                     {line}
-                    {i < x.text[0].split("\n").length - 1 && <br />}{" "}
+                    {i < x.text[0].split("\n").length - 1 && <br />}
                   </span>
                 ))}
                 <span className="text-blue">{x.text[1]}</span>
                 {x.text[2].split("\n").map((line, i) => (
                   <span key={i}>
                     {line}
-                    {i < x.text[2].split("\n").length - 1 && <br />}{" "}
+                    {i < x.text[2].split("\n").length - 1 && <br />}
                   </span>
                 ))}
               </p>
