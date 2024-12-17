@@ -15,7 +15,7 @@ import Step from "./js/Step";
 import Stepsp from "./js/sp/Stepsp";
 import Faq from "./js/Faq";
 import Footer from "./js/pc/footer";
-import Footersp from "./js/sp/Footersp";
+import Footersp from "./js/sp/footersp";
 import Backtotop from "./js/common/Backtotop";
 import useMediaQuery from "./js/common/UseMediaQuery";
 function App() {
