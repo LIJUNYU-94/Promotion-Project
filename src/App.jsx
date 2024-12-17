@@ -16,7 +16,7 @@ import Stepsp from "./js/sp/Stepsp";
 import Faq from "./js/Faq";
 import Footer from "./js/pc/footer";
 import Footersp from "./js/sp/footersp";
-import Backtotop from "./js/common/Backtotop";
+import Backtotop from "./js/common/backtotop";
 import useMediaQuery from "./js/common/UseMediaQuery";
 function App() {
   const phone = useMediaQuery("(max-width: 600px)");
