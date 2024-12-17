@@ -1,6 +1,4 @@
-import { useState } from "react";
 import "./css/Style.css";
-import BackgroundText from "./js/common/Backtext";
 import Header from "./js/pc/Header";
 import Headersp from "./js/sp/Headersp";
 import Nav from "./js/pc/Nav";
@@ -16,7 +14,7 @@ import Price from "./js/Price";
 import Step from "./js/Step";
 import Stepsp from "./js/sp/Stepsp";
 import Faq from "./js/Faq";
-import Footer from "./js/pc/Footer";
+import Footer from "./js/pc/footer";
 import Footersp from "./js/sp/Footersp";
 import Backtotop from "./js/common/Backtotop";
 import useMediaQuery from "./js/common/UseMediaQuery";
