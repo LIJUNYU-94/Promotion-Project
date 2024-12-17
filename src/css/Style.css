@@ -2284,14 +2284,14 @@ table .bold {
  * headersp
  *-------------------------------------- */
   .header {
-    position: sticky;
-    top: 0;
     height: 117px;
     display: grid;
     grid-template-rows: 117px auto;
     justify-content: normal;
   }
   .header.sticky {
+    position: sticky;
+    top: 0;
   }
   .headersp_top {
     width: 100%;
