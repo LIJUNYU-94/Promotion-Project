@@ -67,22 +67,22 @@ function Headersp() {
         </div>
         <nav className={`navsp_nav ${navON ? "open" : ""}`}>
           <ul className="navsp_ul">
-            <li className="navsp_li">
+            <li className="navsp_li" onClick={navtoggle}>
               <a href="#era">今の時代</a>
             </li>
-            <li className="navsp_li">
+            <li className="navsp_li" onClick={navtoggle}>
               <a href="#strengths">選ぶ理由</a>
             </li>
-            <li className="navsp_li">
+            <li className="navsp_li" onClick={navtoggle}>
               <a href="#unique">機能一覧</a>
             </li>
-            <li className="navsp_li">
+            <li className="navsp_li" onClick={navtoggle}>
               <a href="#price">料金案内</a>
             </li>
-            <li className="navsp_li">
+            <li className="navsp_li" onClick={navtoggle}>
               <a href="#step">導入手順</a>
             </li>
-            <li className="navsp_li">
+            <li className="navsp_li" onClick={navtoggle}>
               <a href="#faq">Q＆A</a>
             </li>
           </ul>

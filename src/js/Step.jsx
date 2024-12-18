@@ -1,18 +1,35 @@
-import { useState, useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import Midashi from "./common/Midashi";
-import { useInView } from "react-intersection-observer";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 function Step() {
-  const { ref, inView } = useInView({
-    threshold: 0.2, // 20%見えたらトリガー
-    triggerOnce: true, // 一度だけトリガー
-  });
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+
+    // GSAP アニメーションの設定
+    gsap.fromTo(
+      section,
+      { opacity: 0, y: 50 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: section,
+          start: "top 80%", // セクションがビューポートの80%位置に来たら開始
+          toggleActions: "play none none none",
+        },
+      }
+    );
+  }, []);
+
   return (
     <>
-      <section
-        ref={ref}
-        id="step"
-        className={`step ${inView ? "visible" : "hidden"}`}
-      >
+      <section ref={sectionRef} id="step" className="step">
         <Midashi x={7} />
 
         <div className="step_container">

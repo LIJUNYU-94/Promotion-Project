@@ -1,8 +1,11 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Midashi from "./common/Midashi";
 import BackgroundText from "./common/Backtext";
 import data from "./common/data.json";
-import { useInView } from "react-intersection-observer";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 const faqs = data.faqs;
 function FAQItem({ question, answer, isOpen, onToggle }) {
   return (
@@ -22,19 +25,32 @@ function FAQItem({ question, answer, isOpen, onToggle }) {
 
 const Faq = () => {
   const [active, handler] = useState(null);
+  const sectionRef = useRef(null);
   const handle = (x) => {
     handler(active === x ? null : x);
   };
-  const { ref, inView } = useInView({
-    threshold: 0.2, // 20%見えたらトリガー
-    triggerOnce: true, // 一度だけトリガー
-  });
+  useEffect(() => {
+    const section = sectionRef.current;
+
+    // GSAP アニメーションの設定
+    gsap.fromTo(
+      section,
+      { opacity: 0, y: 50 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: section,
+          start: "top 80%", // セクションがビューポートの80%位置に来たら開始
+          toggleActions: "play none none none",
+        },
+      }
+    );
+  }, []);
   return (
-    <section
-      ref={ref}
-      id="faq"
-      className={`faq ${inView ? "visible" : "hidden"}`}
-    >
+    <section ref={sectionRef} id="faq" className="faq">
       <Midashi x={8} />
       <BackgroundText x={5} />
       <div className="faq_box">

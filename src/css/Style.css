@@ -39,7 +39,7 @@ html {
   box-sizing: border-box;
   font-size: 62.5%;
 }
-.era,
+/* .era,
 .concerns,
 .faq,
 .kv,
@@ -72,7 +72,7 @@ html {
   opacity: 0;
   transform: translateY(80px) scale(0.9);
   transition: opacity 0.5s ease, transform 0.5s ease;
-}
+} */
 .sp-only {
   display: none;
 }
@@ -1145,7 +1145,6 @@ h1 {
   border-radius: 8px;
   padding: 0 3px;
 }
-
 .strengths_sub {
   font-size: 16px;
   font-weight: 500;
@@ -1157,7 +1156,6 @@ h1 {
   justify-content: center;
   position: relative;
 }
-
 .strengths_part-img {
   width: 100%;
   text-align: center;
@@ -2349,8 +2347,22 @@ table .bold {
     grid-template-columns: 1fr 1fr;
     z-index: 17;
   }
+  .bottombtnsp a {
+    font-size: 16px;
+    letter-spacing: 0px;
+  }
+
   .bottombtnsp.hidden {
     display: none;
+  }
+  @media screen and (min-height: 800px) {
+    .bottombtnsp {
+      height: 75px;
+    }
+    .bottombtnsp a {
+      font-size: 18px;
+      letter-spacing: 1.2px;
+    }
   }
   /* --------------------------------------*
  * headersp
@@ -2805,8 +2817,7 @@ table .bold {
     margin: 0 0 0 auto;
   }
   .comparison-table::after {
-    right: auto;
-    left: 0;
+    display: none;
   }
   .comparison-table tr {
     gap: 0;
@@ -2820,10 +2831,17 @@ table .bold {
     flex-direction: column;
     justify-content: space-around;
   }
-  .comparison-table.open {
-    transform: scale(1) translate(0);
-    padding: 0;
-    border: none;
+  .compare-m.open {
+    transform: scale(1.92);
+    z-index: 6;
+    background: #39944d !important;
+    color: white;
+  }
+  .comparison-table tr:last-child td:nth-child(2) {
+    transform-origin: left bottom;
+  }
+  .comparison-table tr:last-child td {
+    transform-origin: right bottom;
   }
   .strengths_part:nth-of-type(2) .strengths_part-text {
     margin-bottom: 8px;
@@ -2938,8 +2956,8 @@ table .bold {
     width: fit-content;
     white-space: nowrap;
   }
-  .swiper-slide-next,
-  .swiper-slide-prev {
+  .unique_partc .swiper-slide-next,
+  .unique_partc .swiper-slide-prev {
     opacity: 0.7;
     scale: 0.8;
   }

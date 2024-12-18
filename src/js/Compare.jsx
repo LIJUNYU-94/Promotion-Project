@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
-
+import useMediaQuery from "./common/UseMediaQuery.jsx";
 const Table = () => {
+  const phone = useMediaQuery("(max-width: 600px)");
   const [isOpen, setIsOpen] = useState(false);
-  const toggleOpen = () => {
-    setIsOpen((prev) => !prev);
+  const toggleOpen = (id) => {
+    setIsOpen((prev) => (prev === id ? null : id));
   };
 
   useEffect(() => {
     const handleScroll = () => {
-      if (isOpen) {
-        setIsOpen(false);
+      if (isOpen === "table") {
+        setIsOpen(null);
       }
     };
 
@@ -21,8 +22,10 @@ const Table = () => {
   return (
     <div>
       <table
-        className={`comparison-table ${isOpen ? "open" : ""}`}
-        onClick={toggleOpen}
+        className={`comparison-table ${isOpen === "table" ? "open" : ""}`}
+        onClick={() => {
+          if (!phone) toggleOpen("table");
+        }}
       >
         <thead>
           <tr>
@@ -47,7 +50,14 @@ const Table = () => {
           </tr>
           <tr>
             <td>金額</td>
-            <td className="compare-ziontd">
+            <td
+              className={`compare-ziontd compare-m ${
+                isOpen === "zion" ? "open" : ""
+              }`}
+              onClick={() => {
+                if (phone) toggleOpen("zion");
+              }}
+            >
               初期費用 36,000円
               <br />
               無制限<span className="bold">（人数の制限なし）</span>
@@ -56,11 +66,16 @@ const Table = () => {
               <br />
               <span className="small">
                 スタンダード 5,000円〜
-                <br />{" "}
+                <br />
               </span>
               <span className="small">ビジネス 15,000円〜</span>
             </td>
-            <td>
+            <td
+              className={`compare-m ${isOpen === "companym" ? "open" : ""}`}
+              onClick={() => {
+                if (phone) toggleOpen("companym");
+              }}
+            >
               プロプラン
               <br />
               <span className="small">
@@ -79,7 +94,12 @@ const Table = () => {
               </span>
               <span className="small">¥3,2988/ユーザー/年</span>
             </td>
-            <td>
+            <td
+              className={`compare-m ${isOpen === "companyz" ? "open" : ""}`}
+              onClick={() => {
+                if (phone) toggleOpen("companyz");
+              }}
+            >
               スタンダード
               <br />
               <span className="small">¥1,632/ユーザー/月</span>

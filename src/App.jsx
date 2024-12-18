@@ -18,6 +18,7 @@ import Footer from "./js/pc/footer";
 import Footersp from "./js/sp/footersp";
 import Backtotop from "./js/common/backtotop";
 import useMediaQuery from "./js/common/UseMediaQuery";
+import { isMobile } from "react-device-detect";
 function App() {
   const phone = useMediaQuery("(max-width: 600px)");
   const stepsp = useMediaQuery("(max-width: 918px)");
@@ -30,7 +31,7 @@ function App() {
       <Era />
       <Concerns />
       <Strengths />
-      {!phone && <Try />}
+      {!isMobile && !phone && <Try />}
       <Unique />
       <Price />
       {stepsp ? <Stepsp /> : <Step />}

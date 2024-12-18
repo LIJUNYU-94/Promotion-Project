@@ -1,10 +1,12 @@
-import { useState, useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import BackgroundText from "./common/Backtext";
 import Midashi from "./common/Midashi";
 import data from "./common/data.json";
 import Compare from "./Compare.jsx";
-import { useInView } from "react-intersection-observer";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import useMediaQuery from "./common/UseMediaQuery.jsx";
+gsap.registerPlugin(ScrollTrigger);
 const strength = data.strength;
 const spWord = (text) => {
   // ハイライトする単語とその正規表現
@@ -25,6 +27,7 @@ const spWord = (text) => {
 const Strengthpart = () => {
   const phone = useMediaQuery("(max-width: 600px)");
   const [strengthData, setStrengthData] = useState(data.strength);
+  const elementsRef = useRef([]);
   useEffect(() => {
     const updatedData = data.strength.map((item) =>
       item.id === 1
@@ -39,10 +42,37 @@ const Strengthpart = () => {
     );
     setStrengthData(updatedData);
   }, [phone]);
+  useEffect(() => {
+    if (elementsRef.current.length > 0) {
+      elementsRef.current.forEach((element, index) => {
+        gsap.fromTo(
+          element,
+          { opacity: 0, y: 50 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: element,
+              start: "top 80%",
+              toggleActions: "play none none none",
+            },
+            delay: index * 0.1, // 順番に表示
+          }
+        );
+      });
+    }
+  }, []);
+  const addToRefs = (el) => {
+    if (el && !elementsRef.current.includes(el)) {
+      elementsRef.current.push(el);
+    }
+  };
   return (
     <>
       {strengthData.map((x) => (
-        <div className="strengths_part" key={x.id}>
+        <div className="strengths_part" key={x.id} ref={addToRefs}>
           <div className="strengths_container">
             <h3>{spWord(x.ttl)}</h3>
             <div className="strengths_part-left">
@@ -167,13 +197,43 @@ const Strengthpart = () => {
 };
 
 const Cases = () => {
+  const caseRef = useRef([]); // 各ボックスの参照
+
+  useEffect(() => {
+    if (caseRef.current.length > 0) {
+      caseRef.current.forEach((caseBox, index) => {
+        gsap.fromTo(
+          caseBox,
+          { opacity: 0, y: 50 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: caseBox,
+              start: "top 80%",
+              toggleActions: "play none none none",
+            },
+            delay: index * 0.2, // 順番に表示
+          }
+        );
+      });
+    }
+  }, []);
+
+  const addCaseToRefs = (el) => {
+    if (el && !caseRef.current.includes(el)) {
+      caseRef.current.push(el);
+    }
+  };
   return (
     <>
       <div className="case">
         <Midashi x={3} />
         <BackgroundText x={2} />
         <div className="case_container">
-          <div className="case_box case_left">
+          <div className="case_box case_left" ref={addCaseToRefs}>
             <figure>
               <img src="docomo.svg" alt="株式会社ドコモCS" />
               <figcaption>株式会社ドコモCS</figcaption>
@@ -186,7 +246,7 @@ const Cases = () => {
               </p>
             </div>
           </div>
-          <div className="case_box case_right">
+          <div className="case_box case_right" ref={addCaseToRefs}>
             <figure>
               <img src="ripty.svg" alt="株式会社リップル" />
               <figcaption>株式会社リップル</figcaption>
@@ -202,13 +262,30 @@ const Cases = () => {
   );
 };
 const Strengths = () => {
-  const { ref, inView } = useInView({
-    threshold: 0.2, // 20%見えたらトリガー
-    triggerOnce: true, // 一度だけトリガー
-  });
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+
+    gsap.fromTo(
+      section,
+      { opacity: 0, y: 50 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: section,
+          start: "top 80%",
+          toggleActions: "play none none none",
+        },
+      }
+    );
+  }, []);
   return (
     <>
-      <div className="strengths" id="strengths">
+      <div className="strengths" id="strengths" ref={sectionRef}>
         <div className="strengths_top"></div>
         <Midashi x={2} />
         <BackgroundText x={0} />

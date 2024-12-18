@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import Midashi from "./common/Midashi";
 import BackgroundText from "./common/Backtext";
 import { useInView } from "react-intersection-observer";
@@ -8,24 +8,48 @@ import { EffectCoverflow } from "swiper/modules";
 import "swiper/css";
 import "swiper/swiper-bundle.css";
 import "swiper/css/effect-coverflow";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 
 function Unique() {
-  const { ref, inView } = useInView({
-    threshold: 0.2, // 20%見えたらトリガー
-    triggerOnce: true, // 一度だけトリガー
-  });
+  const sectionRef = useRef(null);
+  const elementsRef = useRef([]);
   const phone = useMediaQuery("(max-width: 600px)");
+  const addToRefs = (el) => {
+    if (el && !elementsRef.current.includes(el)) {
+      elementsRef.current.push(el);
+    }
+  };
+  useEffect(() => {
+    if (elementsRef.current.length > 0) {
+      elementsRef.current.forEach((element, index) => {
+        gsap.fromTo(
+          element,
+          { opacity: 0, y: 50 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: element,
+              start: "top 80%",
+              toggleActions: "play none none none",
+            },
+            delay: index * 0.1, // 順番にアニメーション
+          }
+        );
+      });
+    }
+  }, []);
   return (
     <>
-      <section
-        ref={ref}
-        id="unique"
-        className={`unique ${inView ? "visible" : "hidden"}`}
-      >
+      <section ref={sectionRef} id="unique" className="unique">
         <Midashi x={5} />
         <BackgroundText x={3} />
         <div className="unique_container">
-          <div className="unique_part">
+          <div className="unique_part" ref={addToRefs}>
             <p className="unique_part-ttl">
               開催ミーティングに独自のロゴマークを設定可能（有料プランのみ）
             </p>
@@ -35,7 +59,7 @@ function Unique() {
               alt="開催ミーティングに独自のロゴマークを設定可能"
             />
           </div>
-          <div className="unique_part">
+          <div className="unique_part" ref={addToRefs}>
             <p className="unique_part-ttl">
               専用アプリを利用することによる <br className="sp-only" />
               Googleカレンダーへ会議予定の
@@ -48,7 +72,7 @@ function Unique() {
               alt="専用アプリを利用することによGoogleカレンダーへ会議予定の登録・参加者の招待が可能"
             />
           </div>
-          <div className="unique_partc">
+          <div className="unique_partc" ref={addToRefs}>
             <p className="unique_part-ttl" id="customize">
               カスタマイズ（ビジネスプランのみ）
             </p>

@@ -1,15 +1,42 @@
-import { useState, useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import BackgroundText from "./common/Backtext";
-import { useInView } from "react-intersection-observer";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 function Keyvisual() {
-  const { ref, inView } = useInView({
-    threshold: 0.2, // 20%見えたらトリガー
-    triggerOnce: true, // 一度だけトリガー
-  });
+  const sectionRef = useRef(null);
+  const elementsRef = useRef([]); // アニメーション対象の要素を管理
+  const addToRefs = (el) => {
+    if (el && !elementsRef.current.includes(el)) {
+      elementsRef.current.push(el);
+    }
+  };
+  useEffect(() => {
+    const section = sectionRef.current;
+
+    // GSAP アニメーションの設定
+
+    gsap.fromTo(
+      elementsRef.current,
+      { opacity: 0, y: 50 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "back.out(5)",
+        stagger: 0.2,
+        scrollTrigger: {
+          trigger: section,
+          start: "top 80%",
+          toggleActions: "play none none none",
+        },
+      }
+    );
+  }, []);
   return (
     <>
-      <section ref={ref} className={`kv ${inView ? "visible" : "hidden"}`}>
-        <h1>
+      <section ref={sectionRef} className="kv">
+        <h1 ref={addToRefs}>
           今こそ掴む、
           <br /> 時代のチャンスを <br />
           <span className="kv_ttl-sub">
@@ -17,7 +44,7 @@ function Keyvisual() {
           </span>
         </h1>
         <BackgroundText x={0} />
-        <div className="kv_pic">
+        <div className="kv_pic" ref={addToRefs}>
           <picture>
             <source media="(min-width: 600px)" srcSet="kvpc.png" />
             <img src="kvsp.png" alt="シニアのシーン" />

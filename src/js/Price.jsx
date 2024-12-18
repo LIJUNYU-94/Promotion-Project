@@ -1,22 +1,38 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Midashi from "./common/Midashi";
 import BackgroundText from "./common/Backtext";
-import { useInView } from "react-intersection-observer";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import useMediaQuery from "./common/UseMediaQuery.jsx";
+gsap.registerPlugin(ScrollTrigger);
 function Price() {
-  const { ref, inView } = useInView({
-    threshold: 0.2, // 20%見えたらトリガー
-    triggerOnce: true, // 一度だけトリガー
-  });
   const [activeTab, setActiveTab] = useState("standard");
   const phone = useMediaQuery("(max-width: 600px)");
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+
+    // GSAP アニメーションの設定
+    gsap.fromTo(
+      section,
+      { opacity: 0, y: 50 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: section,
+          start: "top 80%", // セクションがビューポートの80%位置に来たら開始
+          toggleActions: "play none none none",
+        },
+      }
+    );
+  }, []);
   return (
     <>
-      <section
-        ref={ref}
-        id="price"
-        className={`price ${inView ? "visible" : "hidden"}`}
-      >
+      <section ref={sectionRef} id="price" className="price">
         <Midashi x={6}></Midashi>
         <BackgroundText x={4} />
         <div className="price_container">
