@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
+import useScrollVisibility from "../common/ScrollVisibility";
 function Bottombtnsp() {
+  const isVisible = useScrollVisibility(0.94);
   return (
     <>
-      <div className="bottombtnsp">
+      <div className={`bottombtnsp ${isVisible ? "" : "hidden"} `}>
         <button className="bottomsp buttons_download">
           <a href="">資料ダウンロード</a>{" "}
         </button>

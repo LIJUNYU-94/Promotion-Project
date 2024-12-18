@@ -2,12 +2,14 @@ import { useState, useEffect } from "react";
 import Midashi from "./common/Midashi";
 import BackgroundText from "./common/Backtext";
 import { useInView } from "react-intersection-observer";
-
+import useMediaQuery from "./common/UseMediaQuery.jsx";
 function Price() {
   const { ref, inView } = useInView({
     threshold: 0.2, // 20%見えたらトリガー
     triggerOnce: true, // 一度だけトリガー
   });
+  const [activeTab, setActiveTab] = useState("standard");
+  const phone = useMediaQuery("(max-width: 600px)");
   return (
     <>
       <section
@@ -19,36 +21,58 @@ function Price() {
         <BackgroundText x={4} />
         <div className="price_container">
           <p className="price_text">プラン共通：初期費用36,000円</p>
+          <div className="price_plan-tagbox sp-only">
+            <p
+              className={`price_plan-tag price_plan-tagleft ${
+                activeTab === "standard" ? "active" : ""
+              }`}
+              onClick={() => setActiveTab("standard")}
+            >
+              スタンダード
+            </p>
+            <p
+              className={`price_plan-tag price_plan-tagright ${
+                activeTab === "business" ? "active" : ""
+              }`}
+              onClick={() => setActiveTab("business")}
+            >
+              ビジネス
+            </p>
+          </div>
           <div className="price_plan-container">
-            <div className="price_plan price_plan-standard">
-              <p className="price_plan-ttl">
-                <span>スタンダード</span>プラン
-              </p>
-              <img src="price-std.png" alt="スタンダードプラン" />
-              <p className="price_plan-price">
-                <span>￥</span>
-                <span>5,000</span>～<span>/</span>月
-              </p>
-              <p className="price_plan-cp">お手軽にスタート！</p>
-              <p className="price_plan-text">
-                このプランでは、株式会社ZIONのサーバーを利用し、専用URLを貸し出してご利用いただけます。
-              </p>
-            </div>
-            <div className="price_plan price_plan-business">
-              <p className="price_plan-ttl ">
-                <span>ビジネス</span>プラン
-              </p>
+            {(activeTab === "standard" || !phone) && (
+              <div className="price_plan price_plan-standard">
+                <p className="price_plan-ttl">
+                  <span>スタンダード</span>プラン
+                </p>
+                <img src="price-std.png" alt="スタンダードプラン" />
+                <p className="price_plan-price">
+                  <span>￥</span>
+                  <span>5,000</span>～<span>/</span>月
+                </p>
+                <p className="price_plan-cp">お手軽にスタート！</p>
+                <p className="price_plan-text">
+                  このプランでは、株式会社ZIONのサーバーを利用し、専用URLを貸し出してご利用いただけます。
+                </p>
+              </div>
+            )}
+            {(activeTab === "business" || !phone) && (
+              <div className="price_plan price_plan-business">
+                <p className="price_plan-ttl ">
+                  <span>ビジネス</span>プラン
+                </p>
 
-              <img src="price-business.png" alt="ビジネスプラン" />
-              <p className="price_plan-price">
-                <span>￥</span>
-                <span>15,000</span>～<span>/</span>月
-              </p>
-              <p className="price_plan-cp">自社サーバー導入で安心運用！</p>
-              <p className="price_plan-text">
-                このプランでは、貴社のサーバーに直接システムを導入し、セキュリティーや柔軟性よくてご利用いただけます。
-              </p>
-            </div>
+                <img src="price-business.png" alt="ビジネスプラン" />
+                <p className="price_plan-price">
+                  <span>￥</span>
+                  <span>15,000</span>～<span>/</span>月
+                </p>
+                <p className="price_plan-cp">自社サーバー導入で安心運用！</p>
+                <p className="price_plan-text">
+                  このプランでは、貴社のサーバーに直接システムを導入し、セキュリティーや柔軟性よくてご利用いただけます。
+                </p>
+              </div>
+            )}
             <p className="price_sub">
               ※1. ご利用開始まで1～3営業日いただきます。 <br />
               ※2. プランによってはご利用開始時期が変動する場合があります。
@@ -56,7 +80,7 @@ function Price() {
               ※3.
               ビジネスプランの場合、保守料金として別途ご請求になる場合がございます。
             </p>
-            <button className="price_button">
+            <button className="price_button pc-only">
               導入検討のご相談はこちら
               <svg
                 xmlns="http://www.w3.org/2000/svg"

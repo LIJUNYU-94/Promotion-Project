@@ -52,7 +52,7 @@
     {
       "ttl": "よくある質問",
       "sub": "Q＆A",
-      "class": ""
+      "class": "ttl_underline"
     }
   ],
   "Now": [

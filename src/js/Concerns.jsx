@@ -38,8 +38,8 @@ const Concerns = () => {
           <span>悩</span>
           <span>み</span>
         </p>
+        {/* <BackgroundText x={1} /> */}
       </section>
-      <BackgroundText x={1} />
     </>
   );
 };

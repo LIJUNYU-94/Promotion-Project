@@ -30,7 +30,7 @@ function App() {
       <Era />
       <Concerns />
       <Strengths />
-      <Try />
+      {!phone && <Try />}
       <Unique />
       <Price />
       {stepsp ? <Stepsp /> : <Step />}

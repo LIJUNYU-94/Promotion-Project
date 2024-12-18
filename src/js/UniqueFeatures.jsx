@@ -30,7 +30,10 @@ function Unique() {
           </div>
           <div className="unique_part">
             <p className="unique_part-ttl">
-              専用アプリを利用することによGoogleカレンダーへ会議予定の登録・参加者の招待が可能
+              専用アプリを利用することによる <br className="sp-only" />
+              Googleカレンダーへ会議予定の
+              <br className="sp-only" />
+              登録・参加者の招待が可能
             </p>
             <img
               className="unique_img"

@@ -18,7 +18,11 @@ function Keyvisual() {
         </h1>
         <BackgroundText x={0} />
         <div className="kv_pic">
-          <img src="kvpc.png" alt="シニアのシーン" />
+          <picture>
+            <source media="(min-width: 600px)" srcSet="kvpc.png" />
+            <img src="kvsp.png" alt="シニアのシーン" />
+          </picture>
+
           <div className="kv_pic-box">
             <p className="kv_pic-text">
               登録、ダウンロード不要！

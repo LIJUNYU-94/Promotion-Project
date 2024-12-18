@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
+import useScrollVisibility from "../common/ScrollVisibility";
 function Backtotop() {
+  const bottom = useScrollVisibility(0.95);
   const [isVisible, setIsVisible] = useState(false);
   const handleScroll = () => {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -18,7 +20,10 @@ function Backtotop() {
   return (
     <>
       {isVisible && (
-        <div className="backtotop" onClick={scrollToTop}>
+        <div
+          className={`backtotop ${bottom ? "" : "bottom"}`}
+          onClick={scrollToTop}
+        >
           <p>↑</p>
         </div>
       )}

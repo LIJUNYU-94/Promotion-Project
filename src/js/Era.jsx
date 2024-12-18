@@ -75,7 +75,8 @@ function Era() {
 
         <div className="era_senior">
           <p className="era_senior-phrase">
-            シニア向けのオンラインサービスは、すでに市場に浸透しつつあります...
+            シニア向けのオンラインサービスは、
+            <br className="sp-only" /> すでに市場に浸透しつつあります...
           </p>
           <Erasgallery />
 
@@ -83,14 +84,19 @@ function Era() {
             <BackgroundText x={1} />
             <p className="era_senior-future-text">
               <span className="text-orange text-bold600">シニア市場</span>
-              は急速に成長していますが <br />
-              オンラインサービスの普及はまだ
+              は<br className="sp-only" />
+              急速に成長していますが <br />
+              オンラインサービスの普及は
+              <br className="sp-only" />
+              まだ
               <span className="text-bold600">「芽生え始めた領域」</span>
             </p>
             <p className="era_senior-future-chance">
               この
               <span className="text-blue">未成熟の領域</span>
-              こそが大きな
+              こそが
+              <br className="sp-only" />
+              大きな
               <span className="text-blue text-boldline">チャンス</span>
               と言えます。
             </p>

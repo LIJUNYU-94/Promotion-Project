@@ -199,21 +199,21 @@ function Compare() {
   };
   return (
     <div className="strengths_part-tbl">
-      <div></div>
+      <div className="pc-only"></div>
       <p className="compare-ttl">
         {part === "table" ? <>主要サービスの比較</> : <>費用計算ツール</>}
       </p>
       <p className="compare-calc" onClick={partChange}>
         {part === "table" ? (
           <>
-            費<br />
-            用<br />
-            計<br />算
+            費<br className="pc-only" />
+            用<br className="pc-only" />
+            計<br className="pc-only" />算
           </>
         ) : (
           <>
-            比<br />
-            較<br />表
+            比<br className="pc-only" />
+            較<br className="pc-only" />表
           </>
         )}
       </p>

@@ -6,7 +6,7 @@ const BackgroundTexts = [
   "CASE STUDY",
   "Unique Features",
   "Service Plan",
-  "Customoer Q＆A",
+  "Customer Q＆A",
 ];
 function BackgroundText({ x }) {
   return (
