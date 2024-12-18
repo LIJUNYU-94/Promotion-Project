@@ -2449,6 +2449,11 @@ table .bold {
     padding-top: 10vh;
     gap: 6vh;
   }
+  @media screen and (max-height: 800px) {
+    .navsp_ul {
+      gap: 3vh;
+    }
+  }
   .navsp_li a {
     font-size: 20px;
     color: #0d7cbc;
@@ -2988,6 +2993,11 @@ table .bold {
     height: 100vh;
     text-align: center;
     color: #fff;
+  }
+  @media screen and (max-height: 800px) {
+    .footersp {
+      height: 800px;
+    }
   }
   .footersp-name {
     font-size: 24px;
