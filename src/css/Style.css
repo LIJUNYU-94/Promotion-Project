@@ -2914,7 +2914,9 @@ table .bold {
     margin: 100px auto 50px;
   }
   .unique_partc .unique_part-ttl {
-    width: 90%;
+    width: 100%;
+    text-align: center;
+    white-space: nowrap;
   }
   .unique_part-customize-sp {
     display: flex;
