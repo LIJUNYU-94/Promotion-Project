@@ -2367,7 +2367,6 @@ table .bold {
 
   .headersp_top {
     width: 100%;
-    margin-top: 21px;
     height: 77px;
     display: flex;
     justify-content: space-between;
@@ -2451,7 +2450,7 @@ table .bold {
   }
   @media screen and (max-height: 800px) {
     .navsp_ul {
-      gap: 3vh;
+      gap: 4vh;
     }
   }
   .navsp_li a {
@@ -2468,7 +2467,9 @@ table .bold {
   }
   .header.sticky {
     position: sticky;
-    top: -30px;
+    top: -21px;
+    height: 77px;
+    grid-template-rows: 77px auto;
   }
 
   /* --------------------------------------*
