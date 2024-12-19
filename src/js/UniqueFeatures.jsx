@@ -21,6 +21,16 @@ function Unique() {
       elementsRef.current.push(el);
     }
   };
+  const swiperRef = useRef(null); // Swiper インスタンス用の ref
+
+  useEffect(() => {
+    // 初期化後に再計算を強制
+    if (swiperRef.current && swiperRef.current.swiper) {
+      setTimeout(() => {
+        swiperRef.current.swiper.update(); // Swiper の再計算を実行
+      }, 0);
+    }
+  }, []);
   useEffect(() => {
     if (elementsRef.current.length > 0) {
       elementsRef.current.forEach((element, index) => {
@@ -43,6 +53,7 @@ function Unique() {
       });
     }
   }, []);
+
   return (
     <>
       <section ref={sectionRef} id="unique" className="unique">
@@ -100,6 +111,7 @@ function Unique() {
                 grabCursor={true}
                 spaceBetween={0}
                 loop={true}
+                initialSlide={2}
                 slidesPerView={1.2}
                 centeredSlides={true}
                 coverflowEffect={{
