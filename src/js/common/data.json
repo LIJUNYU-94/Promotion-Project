@@ -179,7 +179,7 @@
       "ttl": "使いやすさと言えばZION-MEET！",
       "btn": "ZION-MEETを体験する",
       "btnlink": "try",
-      "img": "st-screen2.png",
+      "img": "st-screen.png",
       "alt": "ZION-MEETの使用画面",
       "text": [
         "登録不要！\nアプリダウンロード不要！\nだれでも",
@@ -193,7 +193,7 @@
       "ttl": "カスタマイズすればZION-MEET！",
       "btn": "可能性の例をチェック",
       "btnlink": "customize",
-      "img": "st-customize.png",
+      "img": "st-customize2.png",
       "alt": "カストマイズ",
       "text": ["ご利用ユーザーに合わせて、\n希望機能の追加も可能！", "", ""],
       "sub": "※追加機能に応じて料金が発生します"

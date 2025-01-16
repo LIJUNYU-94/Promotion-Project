@@ -1053,7 +1053,27 @@ h1 {
   border-radius: 12px;
   background: #fff;
 }
-@media screen and (min-width: 1400px) and (max-width: 1920px) {
+@media screen and (min-width: 600px) {
+  .strengths_part {
+    height: 350px;
+  }
+  .strengths_part-im {
+    text-align: center;
+  }
+  .strengths_part-img img {
+    max-width: 438px;
+    max-height: 210px;
+    @media screen and (min-width: 1500px) {
+      transform: scale(1.1);
+      transform-origin: right bottom;
+    }
+    @media screen and (min-width: 1800px) {
+      transform: scale(1.2);
+      transform-origin: right bottom;
+    }
+  }
+}
+/* @media screen and (min-width: 1400px) and (max-width: 1920px) {
   .strengths_part:nth-of-type(1),
   .strengths_part:nth-of-type(2) {
     height: 400px;
@@ -1064,7 +1084,7 @@ h1 {
   .strengths_part:nth-of-type(3) .strengths_part-img img {
     height: 100%;
   }
-}
+} */
 
 .strengths_container {
   width: 83%;
@@ -1447,6 +1467,8 @@ table .bold {
 }
 @media screen and (min-width: 1600px) {
   .strengths_part:nth-of-type(1) .strengths_part-right {
+    position: relative;
+    z-index: 10;
     margin-left: 10%;
     transform: scale(1.2);
     transform-origin: left bottom;
