@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 function Btn() {
   const download = () => {
-    const zipUrl = "./ZION-MEET.zip";
+    const zipUrl = "./ZION-MEET.pdf";
     const link = document.createElement("a");
     link.href = zipUrl;
-    link.download = "ZION-MEET.zip";
+    link.download = "ZION-MEET.pdf";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
