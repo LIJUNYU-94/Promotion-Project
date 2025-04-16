@@ -13,11 +13,9 @@ function Btn() {
     <>
       <div className="buttons">
         <button className="buttons_download" onClick={download}>
-          <a href="">資料ダウンロード</a>{" "}
+          資料ダウンロード
         </button>
-        <button className="buttons_contact">
-          <a href="">お問い合わせ</a>
-        </button>
+        <button className="buttons_contact">お問い合わせ</button>
       </div>
     </>
   );
